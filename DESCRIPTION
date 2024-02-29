@@ -1,0 +1,39 @@
+Package: rnaCrosslinkOO
+Type: Package
+Title: Analysis of RNA Crosslinking Data
+Version: 0.1.2
+Authors@R: c(person("Jonathan", "Price", 
+                    email="jlp76@cam.ac.uk", 
+                    role=c("aut","cre"),
+                    comment = c(ORCID = "0000-0001-6554-5667")),
+             person("Andrew", 
+                    "Lim", 
+                     email="ajhl3@cam.ac.uk",
+                     role=c("ctb")))
+Maintainer: Jonathan Price <jlp76@cam.ac.uk>
+Description: Analysis of RNA crosslinking data for RNA structure prediction. The package is suitable for the analysis of RNA structure cross-linking data and chemical probing data.
+License: GPL-3
+Encoding: UTF-8
+BugReports: https://github.com/JLP-BioInf/rnaCrosslinkOO/issues
+Depends: seqinr, GenomicRanges, stats
+Imports: ggplot2, reshape2, MASS, mixtools, utils, S4Vectors,
+        patchwork, doParallel, igraph, R4RNA, RColorBrewer, IRanges,
+        foreach,grDevices, heatmap3, TopDom, tidyverse, RRNA, ggrepel,
+        methods, parallel, ClassDiscovery
+RoxygenNote: 7.3.1
+Collate: 'rnaCrosslinkOO.R' 'rnaCrosslinkDataSet.R'
+        'clusterrnaCrosslink.R'
+        'clusterrnaCrosslinkMethodsAndHelpers.R'
+        'commonHelpersAndMethods.R' 'commonStatsAndPlots.R'
+        'foldrnaCrosslink.R' 'foldrnaCrosslinkMethodsAndHelpers.R'
+        'genericMethods.R' 'rnaCrosslinkDataSetMethodsAndHelpers.R'
+        'rnaCrosslinkOO-package.R'
+Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+NeedsCompilation: no
+Packaged: 2024-02-28 14:05:35 UTC; jp
+Author: Jonathan Price [aut, cre] (<https://orcid.org/0000-0001-6554-5667>),
+  Andrew Lim [ctb]
+Repository: CRAN
+Date/Publication: 2024-02-29 19:20:02 UTC
