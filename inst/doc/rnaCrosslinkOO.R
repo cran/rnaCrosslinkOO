@@ -76,17 +76,28 @@ pathShape <- system.file("extdata",
 shape = read.table(pathShape,
                       header = F)
 
+## ----eval=FALSE---------------------------------------------------------------
+#  rnaCrosslinkQC(sampleTable2,
+#                 directory = ".",
+#                 topTranscripts = F)
+#  
+
 ## -----------------------------------------------------------------------------
 # load the object
 cds = rnaCrosslinkDataSet(rnas = rna,
-                      sampleTable = sampleTable2)
+                      sampleTable = sampleTable2,
+                      subset = "all",
+                      sample = "all")
+# be aware there are extra options here
+# including:
+# subset - allows you to choose specific read sizes (this affects resolution and accuracy)
+# sample - Choose the same ammount of reads for each sample (useful for comparisons)
 
 ## -----------------------------------------------------------------------------
 # Check status of instance 
 cds
 
 ## -----------------------------------------------------------------------------
-
 # Returns the size of the RNA
 rnaSize(cds)
 
