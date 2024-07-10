@@ -69,12 +69,12 @@ path18SFata <- system.file("extdata",
 known18S = read.table(path18SFata,
                       header = F)
 
-## -----------------------------------------------------------------------------
-pathShape <- system.file("extdata",
-                         "reactivities.txt", 
-                         package="rnaCrosslinkOO")
-shape = read.table(pathShape,
-                      header = F)
+## ----eval = F-----------------------------------------------------------------
+#  pathShape <- system.file("extdata",
+#                           "reactivities.txt",
+#                           package="rnaCrosslinkOO")
+#  shape = read.table(pathShape,
+#                        header = F)
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  rnaCrosslinkQC(sampleTable2,
@@ -128,23 +128,23 @@ data = getData(x    = cds,              # The object
 
 head(data)
 
-## -----------------------------------------------------------------------------
-# Returns the RNAs with highest number of assigned reads 
-# regardless of whether it is an Inter or Intra - RNA interaction. 
-topTranscripts(cds,
-               2)  # The number of entries to return
+## ----eval = F-----------------------------------------------------------------
+#  # Returns the RNAs with highest number of assigned reads
+#  # regardless of whether it is an Inter or Intra - RNA interaction.
+#  topTranscripts(cds,
+#                 2)  # The number of entries to return
+#  
 
+## ----eval = F-----------------------------------------------------------------
+#  # Returns the RNAs that interact with the RNA of interest
+#  topInteracters(cds, # The rnaCrosslinkDataSet instance
+#                 1)   # The number of entries to return
 
-## -----------------------------------------------------------------------------
-# Returns the RNAs that interact with the RNA of interest
-topInteracters(cds, # The rnaCrosslinkDataSet instance
-               1)   # The number of entries to return
-
-## -----------------------------------------------------------------------------
-# Returns the Interacions with the highest number of assigned reads
-topInteractions(cds, # The rnaCrosslinkDataSet instance
-                2)   # The number of entries to return
-
+## ----eval = F-----------------------------------------------------------------
+#  # Returns the Interacions with the highest number of assigned reads
+#  topInteractions(cds, # The rnaCrosslinkDataSet instance
+#                  2)   # The number of entries to return
+#  
 
 ## -----------------------------------------------------------------------------
 features = featureInfo(cds) # The rnaCrosslinkDataSet instance
@@ -176,33 +176,33 @@ clusterNumbers(clusteredCds)
 # Returns the number reads in clusters
 readNumbers( clusteredCds)
 
-## -----------------------------------------------------------------------------
-getData(clusteredCds,        # The object             
-        "clusterTableList",  # The Type of data to return     
-        "original")[[1]]     # The stage of the analysis for the return data
+## ----eval=FALSE---------------------------------------------------------------
+#  getData(clusteredCds,        # The object
+#          "clusterTableList",  # The Type of data to return
+#          "original")[[1]]     # The stage of the analysis for the return data
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  getData(clusteredCds,         # The object
 #          "clusterGrangesList", # The Type of data to return
 #          "original")[[1]]      # The stage of the analysis for the return data
 
-## -----------------------------------------------------------------------------
-# Trim the Clusters
-trimmedClusters = trimClusters(clusteredCds = clusteredCds, # The rnaCrosslinkDataSet instance 
-                               trimFactor = 1,              # The cutoff for cluster trimming (see above)
-                               clusterCutoff = 0)          # The minimum number of reads for a cluster to be considered
+## ----eval = F-----------------------------------------------------------------
+#  # Trim the Clusters
+#  trimmedClusters = trimClusters(clusteredCds = clusteredCds, # The rnaCrosslinkDataSet instance
+#                                 trimFactor = 1,              # The cutoff for cluster trimming (see above)
+#                                 clusterCutoff = 0)          # The minimum number of reads for a cluster to be considered
 
-## -----------------------------------------------------------------------------
-# Check status of instance 
-trimmedClusters
+## ----eval = F-----------------------------------------------------------------
+#  # Check status of instance
+#  trimmedClusters
 
-## -----------------------------------------------------------------------------
-# Returns the number of clusters in each sample
-clusterNumbers(trimmedClusters)
+## ----eval = F-----------------------------------------------------------------
+#  # Returns the number of clusters in each sample
+#  clusterNumbers(trimmedClusters)
 
-## -----------------------------------------------------------------------------
-# Returns the number reads in clusters
-readNumbers( trimmedClusters)
+## ----eval = F-----------------------------------------------------------------
+#  # Returns the number reads in clusters
+#  readNumbers( trimmedClusters)
 
 ## -----------------------------------------------------------------------------
 #plotClusterAgreement(trimmedClusters,
@@ -247,13 +247,13 @@ plotCombinedMatrix(cds,
            d = rnaSize(cds))
 
 ## -----------------------------------------------------------------------------
-trimmedClusters
+clusteredCds
 
 ## -----------------------------------------------------------------------------
 # Plot heatmaps for all samples combined and all controls combined
-plotMatricesAverage(cds = trimmedClusters, # The rnaCrosslinkDataSet instance 
-             type1 = "trimmedClusters", # The "analysis stage" to plot on the upper half of the heatmap
-             type2 = "original",        # The "analysis stage" to plot on the lower half of the heatmap
+plotMatricesAverage(cds = clusteredCds, # The rnaCrosslinkDataSet instance 
+             type1 = "originalClusters", # The "analysis stage" to plot on the upper half of the heatmap
+             type2 = "noHost",        # The "analysis stage" to plot on the lower half of the heatmap
              directory = 0,     # The directory for output (0 for standard out)
              a = 1,             # Start coord for x-axis
              b = rnaSize(cds),  # End coord for x-axis
@@ -326,35 +326,35 @@ plotMatricesAverage(cds = trimmedClusters, # The rnaCrosslinkDataSet instance
 #                s = "s1",          # The sample of the structure
 #                n = 1)             # The number of the structure
 
-## -----------------------------------------------------------------------------
+## ----eval=FALSE---------------------------------------------------------------
+#  
+#  getInteractions(cds,
+#                  "ENSG00000XXXXXX_NR003287-2_RN28S1_rRNA") %>%
+#      mutate(sample =sub("\\d$","",sample) )%>%
+#      group_by(rna,Position,sample)%>%
+#      summarise(sum =  sum(depth)) %>%
+#      ggplot()+
+#      geom_area(aes(x = Position,
+#                    y = sum,
+#                    fill = sample),
+#                stat = "identity")+
+#      facet_grid(sample~.) +
+#      theme_bw()
+#  
 
-getInteractions(cds,
-                "ENSG00000XXXXXX_NR003287-2_RN28S1_rRNA") %>%
-    mutate(sample =sub("\\d$","",sample) )%>%
-    group_by(rna,Position,sample)%>%
-    summarise(sum =  sum(depth)) %>%
-    ggplot()+
-    geom_area(aes(x = Position,
-                  y = sum, 
-                  fill = sample), 
-              stat = "identity")+
-    facet_grid(sample~.) +
-    theme_bw()
-
-
-## -----------------------------------------------------------------------------
-getReverseInteractions(cds,
-                       rna) %>%
-    mutate(sample =sub("\\d$","",sample) )%>%
-    group_by(rna,Position,sample)%>%
-    summarise(sum =  sum(depth)) %>%
-    ggplot()+
-    geom_area(aes(x = Position,
-                  y = sum, 
-                  fill = sample), 
-                    stat = "identity")+
-    facet_grid(sample~.)+
-    theme_bw()
+## ----eval=FALSE---------------------------------------------------------------
+#  getReverseInteractions(cds,
+#                         rna) %>%
+#      mutate(sample =sub("\\d$","",sample) )%>%
+#      group_by(rna,Position,sample)%>%
+#      summarise(sum =  sum(depth)) %>%
+#      ggplot()+
+#      geom_area(aes(x = Position,
+#                    y = sum,
+#                    fill = sample),
+#                      stat = "identity")+
+#      facet_grid(sample~.)+
+#      theme_bw()
 
 ## -----------------------------------------------------------------------------
 plotInteractions(cds,
@@ -363,52 +363,52 @@ plotInteractions(cds,
                  b = "max",
                  d = "max")
 
-## -----------------------------------------------------------------------------
-plotInteractionsAverage(cds,
-                 rna = "ENSG000000XXXXX_NR003286-2_RN18S1_rRNA",
-                 interactor = "ENSG00000XXXXXX_NR003287-2_RN28S1_rRNA",
-                 b = "max",
-                 d = "max")
+## ----eval = F-----------------------------------------------------------------
+#  plotInteractionsAverage(cds,
+#                   rna = "ENSG000000XXXXX_NR003286-2_RN18S1_rRNA",
+#                   interactor = "ENSG00000XXXXXX_NR003287-2_RN28S1_rRNA",
+#                   b = "max",
+#                   d = "max")
 
-## -----------------------------------------------------------------------------
-expansionSize = 5
-knownMat = matrix(0, nrow = rnaSize(cds), ncol = rnaSize(cds))
-for(i in 1:nrow(known18S)){
-    knownMat[ (known18S$V1[i]-expansionSize):(known18S$V1[i]+expansionSize),
-              (known18S$V2[i]-expansionSize):(known18S$V2[i]+expansionSize)] =
-        knownMat[(known18S$V1[i]-expansionSize):(known18S$V1[i]+expansionSize),
-                 (known18S$V2[i]-expansionSize):(known18S$V2[i]+expansionSize)] +1
-}
-knownMat = knownMat + t(knownMat)
+## ----eval = F-----------------------------------------------------------------
+#  expansionSize = 5
+#  knownMat = matrix(0, nrow = rnaSize(cds), ncol = rnaSize(cds))
+#  for(i in 1:nrow(known18S)){
+#      knownMat[ (known18S$V1[i]-expansionSize):(known18S$V1[i]+expansionSize),
+#                (known18S$V2[i]-expansionSize):(known18S$V2[i]+expansionSize)] =
+#          knownMat[(known18S$V1[i]-expansionSize):(known18S$V1[i]+expansionSize),
+#                   (known18S$V2[i]-expansionSize):(known18S$V2[i]+expansionSize)] +1
+#  }
+#  knownMat = knownMat + t(knownMat)
+#  
 
+## ----eval = F-----------------------------------------------------------------
+#  # use compare known to gett he known and not know clusters
+#  knowClusteredCds = compareKnown(trimmedClusters, # The rnaCrosslinkDataSet instance
+#                                  knownMat, # A contact matrix of know interactions
+#                                  "trimmedClusters") # The analysis stage of clustering to compare
+#  
+#  knowClusteredCds
 
-## -----------------------------------------------------------------------------
-# use compare known to gett he known and not know clusters
-knowClusteredCds = compareKnown(trimmedClusters, # The rnaCrosslinkDataSet instance 
-                                knownMat, # A contact matrix of know interactions
-                                "trimmedClusters") # The analysis stage of clustering to compare 
+## ----eval = F-----------------------------------------------------------------
+#  # Plot heatmaps for all samples combined and all controls combined
+#  plotMatricesAverage(cds = knowClusteredCds, # The rnaCrosslinkDataSet instance
+#               type1 = "KnownAndNovel", # The "analysis stage"
+#               directory = 0,     # The directory for output (0 for standard out)
+#               a = 1,             # Start coord for x-axis
+#               b = rnaSize(cds),  # End coord for x-axis
+#               c = 1,             # Start coord for y-axis
+#               d = rnaSize(cds),  # End coord for y-axis
+#               h = 5)             # The hight of the image (if saved)
+#  
 
-knowClusteredCds
+## ----eval = F-----------------------------------------------------------------
+#  # Get the number of clusters for each analysis Stage
+#  clusterNumbers(knowClusteredCds)
 
-## -----------------------------------------------------------------------------
-# Plot heatmaps for all samples combined and all controls combined
-plotMatricesAverage(cds = knowClusteredCds, # The rnaCrosslinkDataSet instance 
-             type1 = "KnownAndNovel", # The "analysis stage"
-             directory = 0,     # The directory for output (0 for standard out)
-             a = 1,             # Start coord for x-axis
-             b = rnaSize(cds),  # End coord for x-axis
-             c = 1,             # Start coord for y-axis
-             d = rnaSize(cds),  # End coord for y-axis
-             h = 5)             # The hight of the image (if saved)
-
-
-## -----------------------------------------------------------------------------
-# Get the number of clusters for each analysis Stage
-clusterNumbers(knowClusteredCds)
-
-## -----------------------------------------------------------------------------
-# Get the number of reads in each cluster for each analysis stage
-readNumbers(knowClusteredCds)
+## ----eval = F-----------------------------------------------------------------
+#  # Get the number of reads in each cluster for each analysis stage
+#  readNumbers(knowClusteredCds)
 
 ## ----eval = FALSE-------------------------------------------------------------
 #  head(compareKnownStructures(foldedCds,

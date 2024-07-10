@@ -1,7 +1,7 @@
 Package: rnaCrosslinkOO
 Type: Package
 Title: Analysis of RNA Crosslinking Data
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person("Jonathan", "Price", 
                     email="jlp76@cam.ac.uk", 
                     role=c("aut","cre"),
@@ -32,8 +32,8 @@ Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2024-04-26 10:56:40 UTC; jp
+Packaged: 2024-07-10 15:59:22 UTC; jp
 Author: Jonathan Price [aut, cre] (<https://orcid.org/0000-0001-6554-5667>),
   Andrew Lim [ctb]
 Repository: CRAN
-Date/Publication: 2024-04-29 08:00:02 UTC
+Date/Publication: 2024-07-10 23:40:02 UTC
